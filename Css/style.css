@@ -1,0 +1,414 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--fondo);
+    background-image: radial-gradient(circle, #000000 0.5px, transparent 0.6px);
+    background-size: 7px 7px;
+    background-attachment: fixed;
+    color: var(--texto);
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+}
+
+a {
+    color: inherit;
+}
+
+/* --- Secciones: exactamente una pantalla cada una ---
+   border-box hace que el padding viva DENTRO del min-height:100vh, asi el
+   scroll, el snap y el morph del fondo 3D quedan sincronizados 1:1
+   (una pantalla = una seccion = una figura). El aire de padding garantiza
+   >= 50px entre las lineas del marco y el contenido. */
+section {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--margen) + var(--aire));
+    overflow: hidden;
+}
+
+/* --- Barra de navegacion fija (vive en la franja del marco superior) --- */
+.barraNavegacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--margen);
+    padding: 0 var(--inset);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 6;
+    font-family: "Poppins", sans-serif;
+    pointer-events: none;
+}
+
+.barraNavegacion a {
+    pointer-events: auto;
+}
+
+.logoFijo {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--texto);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+/* En la portada el nombre ya sale gigante: el logo chico se esconde */
+body.enCima .logoFijo {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#menuOpciones ul {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* La nav usa el mismo sistema de poligono que el resto de los botones.
+   Aqui sin mix-blend-mode: la barra fija (position: fixed + z-index) es un
+   stacking context que aisla el fondo de la pagina, asi que el truco de la
+   diferencia no aplicaria; el poligono gris con texto negro lee igual de bien. */
+.enlaceNav {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--textoTenue);
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: color 0.4s ease;
+}
+
+.enlaceNav::before,
+.enlaceNav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.enlaceNav::before {
+    background-color: #c2c2c291;
+    transition: clip-path 0.3s ease;
+}
+
+.enlaceNav::after {
+    background-color: #17171778;
+    transform: translate(10px, 10px) rotate(2deg);
+    transition: clip-path 0.4s ease-out;
+    opacity: 0.3;
+}
+
+.enlaceNav:hover,
+.enlaceNav.activo {
+    color: var(--texto);
+}
+
+.enlaceNav:hover::before,
+.enlaceNav:hover::after,
+.enlaceNav.activo::before,
+.enlaceNav.activo::after {
+    clip-path: polygon(79% 17%, 0% 79%, 100% 79%);
+}
+
+/* --- Portada (hero) --- */
+.cabecera {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--margen) + var(--aire));
+    overflow: hidden;
+}
+
+/* El nombre se mezcla por diferencia con el fondo: sobre el blanco se ve
+   negro y se invierte al cruzarse con las particulas/poligonos negros 3D. */
+.FuenteTitulos {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(48px, 9vw, 102px);
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+    mix-blend-mode: difference;
+    -webkit-text-stroke: 1px #000000;
+    transition: 0.5s ease;
+    width: fit-content;
+}
+
+.FuenteTitulos:hover {
+    transform: scale(1.0035);
+    color: #515151;
+}
+
+.subtituloTitulo {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 12px 0 0;
+    color: var(--texto);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.ganchoHero {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--texto);
+    max-width: 520px;
+    margin: 24px 0 0;
+}
+
+.accionesHero {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+}
+
+/* Botones CTA con el poligono triangular original (misma receta que los
+   botones de proyectos): en reposo solo texto + una linea inferior sutil;
+   al hover se revela el triangulo con su cuña desfasada y el texto se
+   invierte por diferencia con el fondo. */
+.botonCTA {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+    padding: 12px 22px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.35);
+    color: var(--texto);
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.4s ease, border-color 0.3s ease;
+}
+
+.botonCTA::before,
+.botonCTA::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.botonCTA::before {
+    background-color: #c2c2c291;
+    transition: clip-path 0.3s ease;
+}
+
+.botonCTA::after {
+    background-color: #17171778;
+    transform: translate(10px, 10px) rotate(2deg);
+    transition: clip-path 0.4s ease-out;
+    opacity: 0.3;
+}
+
+.botonCTA:hover {
+    color: #ffffff;
+    mix-blend-mode: difference;
+    border-bottom-color: transparent;
+}
+
+.botonCTA:hover::before,
+.botonCTA:hover::after {
+    clip-path: polygon(79% 17%, 0% 79%, 100% 79%);
+}
+
+.fuenteSecundaria {
+    font-family: "Montserrat", sans-serif;
+    font-size: 26px;
+    font-weight: lighter;
+    color: var(--texto);
+}
+
+.SeccionInformacion {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
+    color: var(--texto);
+    line-height: 1.6;
+    padding: 0;
+}
+
+/* --- Titulos fantasma ---
+   Viven DENTRO de su seccion (position absolute): viajan con el scroll,
+   nunca invaden el contenido de otra seccion y no dependen de JS. Van en
+   z-index: -1 (detras del contenido en flujo) y se mezclan por diferencia
+   con el fondo 3D, igual que el nombre. */
+.tituloFantasma {
+    position: absolute;
+    margin: 0;
+    z-index: -1;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 1;
+    white-space: nowrap;
+    color: #ffffff;
+    mix-blend-mode: difference;
+    -webkit-text-stroke: 1px #000000;
+    pointer-events: none;
+}
+
+.tituloFantasma--proyectos {
+    left: 6%;
+    right: auto;
+    bottom: 5%;
+}
+
+.tituloFantasma--info {
+    right: 6%;
+    bottom: 12%;
+    transform: rotate(-90deg);
+}
+
+.tituloFantasma--contacto {
+    left: 6%;
+    bottom: 6%;
+}
+
+/* --- Lista de proyectos (columna izquierda) --- */
+.listaProyectos button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+    border: none;
+    padding: 7px 14px;
+    margin: 10px 0 0 0;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--texto);
+    transition: color 0.4s ease;
+}
+
+.listaProyectos button::before,
+.listaProyectos button::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.listaProyectos button::before {
+    background-color: #c2c2c291;
+    transition: clip-path 0.3s ease;
+}
+
+.listaProyectos button::after {
+    background-color: #17171778;
+    transform: translate(10px, 10px) rotate(2deg);
+    transition: clip-path 0.4s ease-out;
+    opacity: 0.3;
+}
+
+.listaProyectos button:hover,
+.listaProyectos button.active {
+    color: rgb(255, 255, 255);
+    mix-blend-mode: difference;
+}
+
+.listaProyectos button:hover::before,
+.listaProyectos button:hover::after,
+.listaProyectos button.active::before,
+.listaProyectos button.active::after {
+    clip-path: polygon(79% 17%, 0% 79%, 100% 79%);
+}
+
+.listaProyectos h6 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: lighter;
+    color: var(--textoTenue);
+    margin-left: 0;
+    margin-top: 6px;
+}
+
+.descripcionBoton {
+    display: none;
+}
+
+.itemBoton .tagsProyecto {
+    display: none;
+}
+
+/* --- Iconos laterales --- */
+.iconosContacto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    top: 56px;
+    left: 7px;
+    z-index: 4;
+}
+
+.iconosContacto img {
+    opacity: 1;
+    width: 25px;
+    height: 25px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    body {
+        scroll-snap-type: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .gridOndas {
+        display: none;
+    }
+}

@@ -1,0 +1,25 @@
+:root {
+    /* Marco de la pagina */
+    --margen: 40px;
+    --margenMovil: 10px;
+    --colorMargen: transparent;
+
+    /* Inset del marco: franja donde viven la barra fija y los elementos
+       pegados a las lineas (titulo fantasma en movil, iconos laterales). */
+    --inset: calc(var(--margen) + 2px);
+    --insetMovil: calc(var(--margenMovil) + 2px);
+
+    /* Aire interior de cada seccion: separacion minima de 50px entre las
+       lineas del marco y el contenido. En movil se reduce. */
+    --aire: 50px;
+    --aireMovil: 24px;
+
+    /* Tipografia tecnica para las anotaciones del marco */
+    --fuenteTecnica: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+    /* Paleta blanco / negro */
+    --fondo: #ffffff;
+    --texto: #171717;
+    --textoTenue: rgba(23, 23, 23, 0.7);
+    --linea: rgba(23, 23, 23, 0.25);
+}

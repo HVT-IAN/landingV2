@@ -1,0 +1,207 @@
+@media (max-width: 768px) {
+
+    body {
+        overscroll-behavior: none;
+    }
+
+    /* Barra superior */
+    .barraNavegacion {
+        height: 48px;
+        padding: 0 14px;
+    }
+
+    .logoFijo {
+        font-size: 13px;
+    }
+
+    /* Menu de anclas fuera en celular: las fichas no caben en la barra y
+       el scroll + los CTA del hero ya cubren la navegacion */
+    #menuOpciones {
+        display: none;
+    }
+
+    /* Aire de seccion reducido (el marco movil mide 10px) */
+    section,
+    .cabecera {
+        padding: calc(var(--margenMovil) + var(--aireMovil));
+    }
+
+    /* Portada */
+    .FuenteTitulos {
+        font-size: 34px;
+    }
+
+    .subtituloTitulo {
+        font-size: 12px;
+    }
+
+    .ganchoHero {
+        font-size: 13px;
+        margin-top: 16px;
+    }
+
+    .accionesHero {
+        margin-top: 24px;
+    }
+
+    .botonCTA {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    /* Titulos fantasma: abajo-izquierda, chicos y sin rotacion */
+    .tituloFantasma {
+        font-size: 40px;
+        left: var(--insetMovil);
+        right: auto;
+        bottom: 10px;
+    }
+
+    .tituloFantasma--info {
+        transform: none;
+    }
+
+    /* Proyectos: una sola columna */
+    .contenedorProyectos {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+    }
+
+    .listaProyectos button {
+        font-size: 16px;
+    }
+
+    .contenedorProyectos .proyectosDetalles {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .contenedorProyectos .proyectosDetalles>* {
+        margin: 0;
+    }
+
+    .contenedorProyectos .proyectosDetalles #detalle-titulo {
+        order: 1;
+        font-size: 18px;
+    }
+
+    .contenedorProyectos .proyectosDetalles #detalle-fecha {
+        order: 2;
+    }
+
+    .contenedorProyectos .proyectosDetalles #detalle-descripcion {
+        order: 3;
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .contenedorProyectos .proyectosDetalles #detalle-imagen {
+        order: 4;
+        max-width: 180px;
+        margin-top: 10px;
+    }
+
+    .contenedorProyectos .proyectosDetalles .tagsProyecto {
+        order: 5;
+        margin-top: 8px;
+    }
+
+    .contenedorProyectos .proyectosDetalles .enlaceRepo {
+        order: 6;
+        margin-top: 8px;
+    }
+
+    /* Informacion */
+    .contenedor-informacion {
+        max-width: 100%;
+        text-align: justify;
+    }
+
+    .contenedor-informacion .fotoPerfil {
+        max-width: 120px;
+        max-height: 120px;
+        margin-top: 12px;
+    }
+
+    .fuenteSecundaria {
+        font-size: 18px;
+    }
+
+    .SeccionInformacion {
+        font-size: 12px;
+    }
+
+    .tituloTecnologias {
+        margin-top: 14px;
+    }
+
+    .gruposTecnologias {
+        gap: 22px;
+        margin-top: 10px;
+    }
+
+    /* Contacto */
+    .contenedorContacto .fuenteSecundaria {
+        font-size: 22px;
+    }
+
+    /* Marco mas delgado */
+    .margenIzquierdo {
+        top: var(--margenMovil);
+        bottom: var(--margenMovil);
+        left: 0;
+        width: var(--margenMovil);
+    }
+
+    .margenDerecho {
+        top: var(--margenMovil);
+        bottom: var(--margenMovil);
+        right: 0;
+        width: var(--margenMovil);
+    }
+
+    .margenSuperior {
+        left: var(--margenMovil);
+        right: var(--margenMovil);
+        top: 0;
+        height: var(--margenMovil);
+    }
+
+    .margenInferior {
+        left: var(--margenMovil);
+        right: var(--margenMovil);
+        bottom: 0;
+        height: var(--margenMovil);
+    }
+
+    /* Iconos sociales: abajo a la derecha para no chocar con la barra */
+    .iconosContacto {
+        flex-direction: row;
+        top: auto;
+        left: auto;
+        bottom: 18px;
+        right: 14px;
+        gap: 8px;
+    }
+
+    .iconosContacto img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .lineaHorizontal,
+    .leyendaHorizontal,
+    .contadorSeccion,
+    .leyendaSeccion,
+    .leyendaCoordenadas,
+    .lunaFases {
+        display: none;
+    }
+
+    .gridOndas {
+        grid-template-columns: repeat(16, 1fr);
+        gap: 14px;
+        padding: 20px;
+    }
+}

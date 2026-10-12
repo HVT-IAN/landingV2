@@ -1,0 +1,380 @@
+.lineaHorizontal {
+    position: fixed;
+    top: 120px;
+    width: 3px;
+    height: 90px;
+    left: 18px;
+    background-color: rgba(68, 68, 68, 0.35);
+    z-index: 3;
+}
+
+/* La linea mide el recorrido: el relleno negro crece con el scroll
+   (--progresoScroll la escribe script.js en cada frame). */
+.lineaHorizontal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #171717;
+    transform: scaleY(var(--progresoScroll, 0));
+    transform-origin: top;
+}
+
+.leyendaHorizontal {
+    position: fixed;
+    top: 275px;
+    left: -32px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: medium;
+    color: rgb(0, 0, 0);
+    z-index: 3;
+    transform: rotate(-90deg);
+}
+
+/* --- Instrumentos del marco --- */
+
+/* Contador de seccion: franja inferior izquierda */
+.contadorSeccion {
+    position: fixed;
+    left: var(--inset);
+    bottom: 13px;
+    z-index: 3;
+    font-family: var(--fuenteTecnica);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    user-select: none;
+}
+
+.contadorSeccion #contadorActual {
+    color: var(--texto);
+}
+
+.contadorSeccion .contadorTotal {
+    color: var(--textoTenue);
+}
+
+/* Leyenda de seccion: vertical en el margen derecho, espejo del
+   CONTACTAME de la izquierda */
+.leyendaSeccion {
+    position: fixed;
+    right: 13px;
+    top: 34%;
+    z-index: 3;
+    writing-mode: vertical-rl;
+    font-family: var(--fuenteTecnica);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--textoTenue);
+    user-select: none;
+}
+
+/* Coordenadas: franja inferior derecha */
+.leyendaCoordenadas {
+    position: fixed;
+    right: var(--inset);
+    bottom: 13px;
+    z-index: 3;
+    font-family: var(--fuenteTecnica);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--textoTenue);
+    user-select: none;
+}
+
+/* Fase lunar: avanza con el scroll (nueva -> llena al llegar a Contacto),
+   guiño a Persona 3. La sombra de la mascara se desliza con
+   --progresoScroll; el aro mantiene visible la luna nueva. */
+.lunaFases {
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+    transform: translateX(-50%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.lunaFases .sombraLuna {
+    transform: translateX(calc(var(--progresoScroll, 0) * 40px));
+}
+
+/* El fantasma va en z-index: -1 para pintarse detras del contenido en
+   flujo de su seccion, SIN crear stacking contexts en los contenedores:
+   asi el mix-blend-mode de los botones (diferencia con el fondo de la
+   pagina) sigue funcionando, como en el diseno original. */
+
+/* --- Seccion Informacion --- */
+.contenedor-informacion {
+    max-width: 760px;
+    color: var(--texto);
+}
+
+.contenedor-informacion .fotoPerfil {
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 20px;
+    padding: 6px;
+    border: 1px solid var(--linea);
+}
+
+.tituloTecnologias {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 26px 0 0 0;
+    text-align: left;
+}
+
+.gruposTecnologias {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.grupoTecnologia h4 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--textoTenue);
+    margin: 0 0 10px;
+}
+
+.listaTecnologias {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.listaTecnologias img.iconoTecnologia {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+}
+
+.chipTech {
+    border: 1px solid var(--linea);
+    padding: 8px 14px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--texto);
+}
+
+/* --- Seccion Proyectos: dos columnas (lista | detalle) --- */
+.contenedorProyectos {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    /* Respiro amplio entre la lista de botones y el panel de detalle */
+    gap: clamp(120px, 12vw, 260px);
+    align-items: start;
+}
+
+.proyectosDetalles {
+    color: var(--texto);
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    min-height: 0;
+    /* Anclada al margen derecho: el pasillo entre las columnas absorbe
+       todo el espacio libre de la pantalla (separacion maxima). En
+       columnas angostas el min(500px, 100%) la mantiene completa. */
+    justify-self: end;
+    width: min(500px, 100%);
+}
+
+.proyectosDetalles h2 {
+    margin: 0 0 8px;
+    color: var(--texto);
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    font-size: 24px;
+}
+
+.proyectosDetalles p {
+    max-width: 500px;
+    color: var(--texto);
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+}
+
+.itemBoton {
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.itemBoton:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+#detalle-imagen {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+#detalle-imagen[hidden] {
+    display: none;
+}
+
+#detalle-fecha {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.75);
+    margin: 0 0 20px;
+}
+
+.tagsProyecto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+}
+
+.tagsProyecto li {
+    border: 1px solid rgba(10, 10, 10, 0.45);
+    padding: 3px 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--texto);
+}
+
+.enlaceRepo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.enlaceRepo:hover {
+    text-decoration: underline;
+}
+
+/* --- Seccion Contacto (centrado vertical via flex de la seccion) --- */
+.contenedorContacto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.contenedorContacto .fuenteSecundaria {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 600;
+    color: var(--texto);
+    margin: 0;
+}
+
+.grupoContacto {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* --- Rejilla de puntos pulsantes de fondo --- */
+.gridOndas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+
+.gridOndas span {
+    width: 0.5px;
+    height: 2px;
+    background: rgb(114, 114, 114);
+    border-radius: 50%;
+    opacity: 0.5;
+    transform-origin: center;
+    animation: pulso 3s ease-in-out infinite;
+}
+
+@keyframes pulso {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        transform: scaleY(0.6);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scaleY(1.4);
+    }
+}
+
+/* --- Marco que enmarca la pantalla --- */
+.contenedor-margenes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.margenIzquierdo,
+.margenDerecho,
+.margenSuperior,
+.margenInferior {
+    position: fixed;
+    background-color: var(--colorMargen);
+}
+
+.margenIzquierdo {
+    top: 40px;
+    bottom: 40px;
+    left: 0;
+    width: var(--margen);
+    border-right: 1.5px solid black;
+}
+
+.margenDerecho {
+    top: 40px;
+    bottom: 40px;
+    right: 0;
+    width: var(--margen);
+    border-left: 1.5px solid black;
+}
+
+.margenSuperior {
+    left: 40px;
+    right: 40px;
+    top: 0;
+    height: var(--margen);
+    border-bottom: 1.5px solid black;
+}
+
+.margenInferior {
+    left: 40px;
+    right: 40px;
+    bottom: 0;
+    height: var(--margen);
+    border-top: 1.5px solid black;
+}
