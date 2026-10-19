@@ -35,6 +35,11 @@
         font-size: 12px;
     }
 
+    .estadoDisponibilidad {
+        font-size: 10px;
+        margin-bottom: 16px;
+    }
+
     .ganchoHero {
         font-size: 13px;
         margin-top: 16px;
@@ -58,6 +63,7 @@
     }
 
     .tituloFantasma--info {
+        writing-mode: horizontal-tb;
         transform: none;
     }
 
@@ -185,7 +191,7 @@
         gap: 8px;
     }
 
-    .iconosContacto img {
+    .iconosContacto svg {
         width: 20px;
         height: 20px;
     }

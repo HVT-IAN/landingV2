@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+    <rect width="840" height="500" fill="#ffffff"/>
+
+    <!-- Marco con cruces de registro -->
+    <rect x="26" y="26" width="788" height="448" fill="none" stroke="#171717" stroke-width="2"/>
+    <g stroke="#171717" stroke-width="2">
+        <path d="M12 26 H40 M26 12 V40"/>
+        <path d="M800 26 H828 M814 12 V40"/>
+        <path d="M12 474 H40 M26 460 V488"/>
+        <path d="M800 474 H828 M814 460 V488"/>
+    </g>
+
+    <text x="56" y="72" font-family="monospace" font-size="17" letter-spacing="5" fill="#171717">IAN OSCANI</text>
+    <text x="784" y="72" text-anchor="end" font-family="monospace" font-size="14" letter-spacing="3" fill="#171717">N 16.75° · W 93.10°</text>
+
+    <!-- Icosaedro wireframe: hexagono, triangulo interior y aristas -->
+    <g stroke="#171717" stroke-width="1.5" fill="none">
+        <polygon points="550,225 485,338 355,338 290,225 355,112 485,112"/>
+        <polygon points="476,258 364,258 420,160"/>
+        <path d="M476 258 L550 225 M476 258 L485 338 M364 258 L290 225 M364 258 L355 338 M420 160 L355 112 M420 160 L485 112"/>
+    </g>
+    <g fill="#171717">
+        <circle cx="550" cy="225" r="4"/>
+        <circle cx="485" cy="338" r="4"/>
+        <circle cx="355" cy="338" r="4"/>
+        <circle cx="290" cy="225" r="4"/>
+        <circle cx="355" cy="112" r="4"/>
+        <circle cx="485" cy="112" r="4"/>
+        <circle cx="476" cy="258" r="4"/>
+        <circle cx="364" cy="258" r="4"/>
+        <circle cx="420" cy="160" r="4"/>
+    </g>
+
+    <!-- Fases lunares: nueva -> llena -->
+    <g>
+        <circle cx="100" cy="408" r="11" fill="none" stroke="#171717" stroke-width="2"/>
+        <circle cx="146" cy="408" r="11" fill="#171717"/>
+        <circle cx="151" cy="408" r="11" fill="#ffffff"/>
+        <circle cx="192" cy="408" r="11" fill="#171717"/>
+        <circle cx="203" cy="408" r="11" fill="#ffffff"/>
+        <circle cx="238" cy="408" r="11" fill="#171717"/>
+        <circle cx="255" cy="408" r="11" fill="#ffffff"/>
+        <circle cx="284" cy="408" r="11" fill="#171717"/>
+    </g>
+
+    <text x="784" y="413" text-anchor="end" font-family="monospace" font-size="14" letter-spacing="3" fill="#171717">PORTAFOLIO — WEBGL · GSAP · 2026</text>
+</svg>
